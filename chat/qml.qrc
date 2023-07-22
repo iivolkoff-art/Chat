@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainWindow.qml</file>
+        <file>ChatField.qml</file>
+        <file>InputField.qml</file>
+    </qresource>
+</RCC>
