@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import "C:/Users/Volkov/Documents/chat/InputField.qml" as InputField
+import "C:/Users/Volkov/Documents/chat/InputField.qml" as InputField //замените на свой путь
 
 Item {
     property color messageColor: "#00DFFC"
@@ -37,18 +37,19 @@ Item {
                 id: contentText
                 text: model.messageText
                 color: messageColor
-                font.pixelSize: 16
+                font.pixelSize: 18
                 wrapMode: Text.WordWrap
                 anchors.onLeftChanged: parent
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+                anchors.verticalCenter: parent.verticalCenter
             }
         }
 
-        // Adjust the contentY when the model changes (new messages are added)
         onModelChanged: {
             chatListView.contentY = chatListView.contentHeight - chatListView.height;
         }
 
-        // Keep the scrollbar visible at the bottom even when new messages are added
         onContentYChanged: {
             if (chatListView.contentY >= chatListView.contentHeight - chatListView.height)
                 chatListView.contentY = chatListView.contentHeight - chatListView.height;
@@ -57,7 +58,6 @@ Item {
     onMessageChanged: {
         if(message != ""){
             messageModel.append({ messageText: message });
-            // Scroll to the newly added message
             chatListView.contentY = chatListView.contentHeight - chatListView.height;
             message = ""
             messageColor = "#00DFFC"

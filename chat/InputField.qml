@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
-import "C:/Users/Volkov/Documents/chat/ChatField.qml" as ChatField
+import "C:/Users/Volkov/Documents/chat/ChatField.qml" as ChatField //замените на свой путь
 
 Item {
     property string message: inputText.text
@@ -19,28 +19,28 @@ Item {
             width: parent.width
             color: backgroundColor
 
-            TextInput  {
+            TextInput {
                 id: inputText
                 anchors.fill: parent
-                anchors.leftMargin: 5
+                anchors.leftMargin: 15
                 color: "white"
                 verticalAlignment: TextInput.AlignVCenter
-                activeFocusOnPress: true // Добавляем это свойство
-                //PlaceholderText: "message"
+                activeFocusOnPress: true
 
                 Keys.onReturnPressed: {
                     chatField.message = inputText.text + "      |- Ivan";
                     inputText.text = "";
                     Qt.inputMethod.visible = true;
                 }
-                property string placeholderText: "Enter text here..."
+
+//                property string placeholderText: "Enter text here..."
                 Text {
-                    text: inputText.placeholderText
+                    text: "message"
                     color: "#aaa"
                     anchors.fill: parent
+                    verticalAlignment: Text.AlignVCenter
                     visible: !inputText.text && !inputText.activeFocus
                 }
-
             }
         }
         Rectangle {
@@ -51,12 +51,4 @@ Item {
             color: "grey"
         }
     }
-
-//    onMessageChanged: {
-//        if (message !== "") {
-//            placeholderText.visible = false;
-//        } else {
-//            placeholderText.visible = true;
-//        }
-//    }
 }
