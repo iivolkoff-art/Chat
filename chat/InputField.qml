@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import com.myapp 1.0
 
 import "C:/Users/Volkov/Documents/chat/ChatField.qml" as ChatField //замените на свой путь
 
@@ -10,6 +11,9 @@ Item {
     width: parent.width
     anchors.top: chatField.bottom
     anchors.bottom: parent.bottom
+    Client {
+        id: client
+    }
     Rectangle {
         id: inputFieldRectangle
         anchors.fill: parent
@@ -18,6 +22,7 @@ Item {
             height: parent.height
             width: parent.width
             color: backgroundColor
+
 
             TextInput {
                 id: inputText
@@ -28,9 +33,9 @@ Item {
                 activeFocusOnPress: true
 
                 Keys.onReturnPressed: {
-                    chatField.message = inputText.text + "      |- Ivan";
+                    client.setMessage(inputText.text + "      |- Ivan");
+                    chatField.message = client.getMessage();
                     inputText.text = "";
-                    Qt.inputMethod.visible = true;
                 }
 
 //                property string placeholderText: "Enter text here..."

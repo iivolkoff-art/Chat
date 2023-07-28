@@ -21,16 +21,16 @@ Item {
         orientation: Qt.Vertical
         spacing: 5
         clip: true
-        interactive: false
+
 
         ScrollBar.vertical: ScrollBar {
             anchors.right: parent.right
-            policy: ScrollBar.AlwaysOn
+            policy: ScrollBar.AlwaysOff //выключенный скрол бар
         }
 
         delegate: Rectangle {
             width: parent.width
-            height: contentText.height
+            height: contentText.height + 10
             color: backgroundColor
 
             Text {
@@ -39,9 +39,8 @@ Item {
                 color: messageColor
                 font.pixelSize: 18
                 wrapMode: Text.WordWrap
-                anchors.onLeftChanged: parent
                 anchors.left: parent.left
-                anchors.leftMargin: 5
+                anchors.leftMargin: 10 // Увеличим отступ слева для текста
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
@@ -51,16 +50,23 @@ Item {
         }
 
         onContentYChanged: {
-            if (chatListView.contentY >= chatListView.contentHeight - chatListView.height)
+            if (chatListView.contentY >= chatListView.contentHeight - chatListView.height){
                 chatListView.contentY = chatListView.contentHeight - chatListView.height;
+            }
         }
     }
+
     onMessageChanged: {
-        if(message != ""){
+        if (message !== "") {
             messageModel.append({ messageText: message });
             chatListView.contentY = chatListView.contentHeight - chatListView.height;
-            message = ""
-            messageColor = "#00DFFC"
+
+            // Плавно прокрутим к последнему добавленному сообщению
+            chatListView.positionViewAtIndex(messageModel.count - 1, ListView.End);
+
+            message = "";
+            messageColor = "#00DFFC";
         }
     }
 }
+
