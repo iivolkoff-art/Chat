@@ -10,7 +10,7 @@ class Client : public QObject
 private:
     QString message;
 public:
-    //explicit Client(QObject *parent = nullptr);
+    explicit Client(QObject *parent = nullptr);
 
     Q_INVOKABLE void setMessage(QString message);
     Q_INVOKABLE QString getMessage();
