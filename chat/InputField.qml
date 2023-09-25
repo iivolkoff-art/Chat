@@ -8,9 +8,6 @@ import "C:/Users/Volkov/Documents/chat/ChatField.qml" as ChatField //замен�
 Item {
     property string message: inputText.text
     id: inputField
-    width: parent.width
-    anchors.top: chatField.bottom
-    anchors.bottom: parent.bottom
     Client {
         id: client
     }
@@ -32,8 +29,9 @@ Item {
                 verticalAlignment: TextInput.AlignVCenter
                 activeFocusOnPress: true
 
-                Keys.onReturnPressed: {
+                Keys.onReturnPressed: { // enter
                     client.setMessage(inputText.text + "      |- Ivan");
+                    client.sendToServer(inputText.text + "      |- Ivan");
                     chatField.message = client.getMessage();
                     inputText.text = "";
                 }

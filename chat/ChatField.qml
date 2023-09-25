@@ -6,9 +6,6 @@ Item {
     property color messageColor: "#00DFFC"
     property string message: ""
     id: chatField
-    anchors.top: parent.top
-    width: parent.width
-    height: parent.height * 0.95
 
     ListModel {
         id: messageModel
